@@ -1,0 +1,1 @@
+"""Customer Manager application package."""
