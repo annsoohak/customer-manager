@@ -1,3 +1,32 @@
+# Python bytecode and caches
 __pycache__/
 *.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Coverage and test output
+.coverage
+.coverage.*
+htmlcov/
+
+# Local environments and secrets
+.venv/
+venv/
+env/
+.env
+.env.*
+!.env.example
+
+# Local runtime files
+*.log
 customer.db
+customer.db-shm
+customer.db-wal
+
+# Editors and operating systems
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db

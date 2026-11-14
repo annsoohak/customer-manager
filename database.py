@@ -1,10 +1,12 @@
 """SQLite engine, session factory, and database initialization entry point."""
 
+from collections.abc import Generator
+
 from pathlib import Path
 
 from sqlalchemy import create_engine, event, inspect
 from sqlalchemy.engine import Engine
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import Session, sessionmaker
 
 from models import Base
 
@@ -31,6 +33,16 @@ def init_db() -> list[str]:
 
     Base.metadata.create_all(bind=engine)
     return sorted(inspect(engine).get_table_names())
+
+
+def get_db() -> Generator[Session, None, None]:
+    """Provide one SQLAlchemy session per FastAPI request."""
+
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
 
 
 if __name__ == "__main__":
